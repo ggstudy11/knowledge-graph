@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+springdoc:
+  api-docs:
+    path: /v1/api-docs # API 文档路径
+  swagger-ui:
+    path: /swagger-ui.html # Swagger UI 路径
