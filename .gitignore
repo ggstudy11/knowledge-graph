@@ -1,2 +1,2 @@
-git rm -r --cached **/target
-git rm -r --cached **/src/main/resources
+**/target
+**/src/main/resources

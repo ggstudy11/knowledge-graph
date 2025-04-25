@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @description 用户管理接口
  */
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user/users")
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "用户管理接口", description = "提供用户相关的操作接口")
@@ -44,7 +44,7 @@ public class UserController {
     */
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "用户通过手机号和密码注册")
-    public R<Object> register(@Valid RegisterDTO registerDTO) {
+    public R<Object> register(@Valid @RequestBody RegisterDTO registerDTO) {
         userService.register(registerDTO);
         return R.success();
     }

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * @author ggstudy11
@@ -13,6 +14,7 @@ import lombok.Data;
  */
 @Schema(description = "注册数据模型")
 @Data
+@ToString
 public class RegisterDTO {
 
     @Schema(description = "电话号", example = "15669893275")
@@ -22,8 +24,10 @@ public class RegisterDTO {
     private String phone;
 
     @Schema(description = "用户名")
+    @NotNull(message = "用户名不能为空")
     private String username;
 
     @Schema(description = "密码")
+    @NotNull(message = "密码不能为空")
     private String password;
 }
