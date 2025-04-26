@@ -18,29 +18,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class UserServiceImplTest {
 
-//    @Autowired
-//    private IUserService userService;
-//
-//
-//    @Test public void registerTest() {
-//        RegisterDTO registerDTO = new RegisterDTO();
-//        registerDTO.setUsername("测试用户1");
-//        registerDTO.setPassword("test123456");
-//        registerDTO.setPhone("15669893275");
-//        userService.register(registerDTO);
-//    }
-//
-//    @Test public void loginTest() {
-//        LoginDTO loginDTO = new LoginDTO();
-//        loginDTO.setPassword("test123456");
-//        loginDTO.setPhone("15669893275");
-//        LoginVO loginVO = userService.login(loginDTO);
-//        System.out.println(loginVO);
-//    }
-//
-//    @Test public void getUserInfoTest() {
-//        UserInfoVO userInfoVO = userService.getInfo(1L);
-//        System.out.println(userInfoVO);
-//    }
+    @Autowired
+    private IUserService userService;
+
+
+    @Test public void registerTest() {
+        RegisterDTO registerDTO = new RegisterDTO();
+        registerDTO.setUsername("测试用户1");
+        registerDTO.setPassword("test123456");
+        registerDTO.setPhone("15669893275");
+        userService.register(registerDTO);
+    }
+
+    @Test public void loginTest() {
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setPassword("123456");
+        loginDTO.setPhone("15669893275");
+        LoginVO loginVO = userService.login(loginDTO);
+        System.out.println(loginVO);
+    }
+
+    @Test public void getUserInfoTest() {
+        UserInfoVO userInfoVO = userService.getInfo(1L);
+        System.out.println(userInfoVO);
+    }
 
 }
