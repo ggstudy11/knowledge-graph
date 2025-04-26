@@ -7,6 +7,8 @@ import com.kg.common.utils.JwtUtil;
 import com.kg.user.model.User;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
+import com.kg.user.model.dto.UpdatePasswordDTO;
+import com.kg.user.model.dto.UpdateUserInfoDTO;
 import com.kg.user.model.vo.LoginVO;
 import com.kg.user.model.vo.UserInfoVO;
 import com.kg.user.repository.UserMapper;
@@ -92,5 +94,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .gender(user.getGender())
                 .avatar(user.getAvatar())
                 .build();
+    }
+
+    @Override
+    public void updatePassword(UpdatePasswordDTO updatePasswordDTO) {
+        String password = updatePasswordDTO.getPassword();
+        String phone = updatePasswordDTO.getPhone();
+
+        User user = this.getOne(new QueryWrapper<User>().lambda().eq(User::getPhone, phone));
+        String salt = user.getSalt();
+        String newPassword = salt + password;
+        String newPasswordInMD5 = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+        user.setPassword(newPasswordInMD5);
+
+        this.updateById(user);
+    }
+
+    @Override
+    public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Long id) {
+        User user = getById(id);
+        user.setUsername(updateUserInfoDTO.getUsername());
+        user.setAvatar(updateUserInfoDTO.getAvatar());
+
+        this.updateById(user);
     }
 }

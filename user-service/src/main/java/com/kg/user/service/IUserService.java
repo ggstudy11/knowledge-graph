@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.kg.user.model.User;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
+import com.kg.user.model.dto.UpdatePasswordDTO;
+import com.kg.user.model.dto.UpdateUserInfoDTO;
 import com.kg.user.model.vo.LoginVO;
 import com.kg.user.model.vo.UserInfoVO;
 import jakarta.validation.Valid;
@@ -19,4 +21,8 @@ public interface IUserService extends IService<User> {
     void register(@Valid RegisterDTO registerDTO);
 
     UserInfoVO getInfo(Long id);
+
+    void updatePassword(UpdatePasswordDTO updatePasswordDTO);
+
+    void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Long id);
 }
