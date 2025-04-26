@@ -8,6 +8,7 @@ import com.kg.user.model.User;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
 import com.kg.user.model.vo.LoginVO;
+import com.kg.user.model.vo.UserInfoVO;
 import com.kg.user.repository.UserMapper;
 import com.kg.user.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -80,5 +81,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .build();
 
         this.save(user);
+    }
+
+    @Override
+    public UserInfoVO getInfo(Long id) {
+        User user = getById(id);
+        return UserInfoVO.builder()
+                .username(user.getUsername())
+                .phone(user.getPhone())
+                .gender(user.getGender())
+                .avatar(user.getAvatar())
+                .build();
     }
 }

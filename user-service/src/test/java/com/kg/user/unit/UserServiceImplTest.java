@@ -1,8 +1,10 @@
 package com.kg.user.unit;
 
+import com.kg.common.UserContext;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
 import com.kg.user.model.vo.LoginVO;
+import com.kg.user.model.vo.UserInfoVO;
 import com.kg.user.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class UserServiceImplTest {
         loginDTO.setPhone("15669893275");
         LoginVO loginVO = userService.login(loginDTO);
         System.out.println(loginVO);
+    }
+
+    @Test public void getUserInfoTest() {
+        UserInfoVO userInfoVO = userService.getInfo(1L);
+        System.out.println(userInfoVO);
     }
 
 }

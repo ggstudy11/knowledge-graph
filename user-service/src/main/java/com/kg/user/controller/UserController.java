@@ -1,9 +1,11 @@
 package com.kg.user.controller;
 
 import com.kg.common.R;
+import com.kg.common.UserContext;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
 import com.kg.user.model.vo.LoginVO;
+import com.kg.user.model.vo.UserInfoVO;
 import com.kg.user.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -67,8 +69,8 @@ public class UserController {
     */
     @GetMapping()
     @Operation(summary = "获取用户信息", description = "获取用户相关信息")
-    public void getInfo() {
-
+    public R<UserInfoVO> get() {
+        return R.success(userService.getInfo(UserContext.getUser()));
     }
 
     /** 找回密码

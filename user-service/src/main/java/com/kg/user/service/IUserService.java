@@ -5,6 +5,7 @@ import com.kg.user.model.User;
 import com.kg.user.model.dto.LoginDTO;
 import com.kg.user.model.dto.RegisterDTO;
 import com.kg.user.model.vo.LoginVO;
+import com.kg.user.model.vo.UserInfoVO;
 import jakarta.validation.Valid;
 
 /**
@@ -16,4 +17,6 @@ public interface IUserService extends IService<User> {
     LoginVO login(@Valid LoginDTO loginDTO);
 
     void register(@Valid RegisterDTO registerDTO);
+
+    UserInfoVO getInfo(Long id);
 }
