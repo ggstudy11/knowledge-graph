@@ -6,7 +6,7 @@ package com.kg.common;
  * @description 保存用户信息上下文
  */
 public class UserContext {
-    private static final ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
 
     /**
      * @Description  存入用户id
@@ -15,7 +15,7 @@ public class UserContext {
      * @Author ggstudy11
      * @Date
      */
-    public static void setUser(Long userId) {
+    public static void setUser(Integer userId) {
         threadLocal.set(userId);
     }
 
@@ -26,7 +26,7 @@ public class UserContext {
      * @Author ggstudy11
      * @Date
      */
-    public static Long getUser() {
+    public static Integer getUser() {
         return threadLocal.get();
     }
 

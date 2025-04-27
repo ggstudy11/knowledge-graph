@@ -86,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public UserInfoVO getInfo(Long id) {
+    public UserInfoVO getInfo(Integer id) {
         User user = getById(id);
         return UserInfoVO.builder()
                 .username(user.getUsername())
@@ -111,7 +111,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Long id) {
+    public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Integer id) {
         User user = getById(id);
         user.setUsername(updateUserInfoDTO.getUsername());
         user.setAvatar(updateUserInfoDTO.getAvatar());

@@ -20,9 +20,9 @@ public interface IUserService extends IService<User> {
 
     void register(@Valid RegisterDTO registerDTO);
 
-    UserInfoVO getInfo(Long id);
+    UserInfoVO getInfo(Integer id);
 
     void updatePassword(UpdatePasswordDTO updatePasswordDTO);
 
-    void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Long id);
+    void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Integer id);
 }

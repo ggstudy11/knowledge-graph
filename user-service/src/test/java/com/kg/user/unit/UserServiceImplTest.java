@@ -39,7 +39,7 @@ public class UserServiceImplTest {
     }
 
     @Test public void getUserInfoTest() {
-        UserInfoVO userInfoVO = userService.getInfo(1L);
+        UserInfoVO userInfoVO = userService.getInfo(1);
         System.out.println(userInfoVO);
     }
 
