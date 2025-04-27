@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @description 用户管理接口
  */
 @RestController
-@RequestMapping("/api/user/users")
+@RequestMapping("/api/user")
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "用户管理接口", description = "提供用户相关的操作接口")
