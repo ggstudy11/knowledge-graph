@@ -61,7 +61,7 @@ public class UserController {
     @PutMapping()
     @Operation(summary = "修改用户信息", description = "修改用户用户名和头像")
     public R<Object> updateInfo(@RequestBody UpdateUserInfoDTO updateUserInfoDTO) {
-        userService.updateInfo(updateUserInfoDTO, UserContext.getUser());
+        userService.updateInfo(updateUserInfoDTO);
         return R.success();
     }
 

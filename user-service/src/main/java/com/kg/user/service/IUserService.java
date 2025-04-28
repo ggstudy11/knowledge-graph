@@ -24,5 +24,5 @@ public interface IUserService extends IService<User> {
 
     void updatePassword(UpdatePasswordDTO updatePasswordDTO);
 
-    void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Integer id);
+    void updateInfo(UpdateUserInfoDTO updateUserInfoDTO);
 }

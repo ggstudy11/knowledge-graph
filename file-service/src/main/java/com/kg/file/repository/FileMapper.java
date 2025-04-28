@@ -1,8 +1,13 @@
 package com.kg.file.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.kg.common.page.PageQuery;
 import com.kg.file.model.File;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.Map;
 
 /**
  * @author ggstudy11
@@ -11,4 +16,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface FileMapper extends BaseMapper<File> {
+
+    @Select("SELECT folder.id as id, folder.name as name, 1 as is_folder, -1 as type, folder.create_time as last_time " +
+            "FROM folder " +
+            "WHERE  folder.parent_id = #{id} " +
+            "UNION ALL " +
+            "SELECT file.id as id,  file.name as name, 0 as is_folder, file.type as type, file.update_time as last_time " +
+            "FROM file " +
+            "WHERE file.folder_id = #{id}")
+    Page<Map<String, Object>> selectFileAndFolder(Integer id, Page<?> page);
 }

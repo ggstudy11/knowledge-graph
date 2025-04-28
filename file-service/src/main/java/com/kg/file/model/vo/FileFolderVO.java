@@ -1,9 +1,9 @@
 package com.kg.file.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 /**
  * @author ggstudy11
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @ToString
 @Schema(description = "分页查询数据模型")
-@Builder
+@NoArgsConstructor
 public class FileFolderVO {
     @Schema(description = "id")
     private Integer id;
@@ -25,5 +25,8 @@ public class FileFolderVO {
     private Integer type;
 
     @Schema(description = "是否为文件夹")
-    private Boolean isFolder;
+    private Integer isFolder;
+
+    @Schema(description = "最后一次修改时间")
+    private LocalDateTime lastTime;
 }

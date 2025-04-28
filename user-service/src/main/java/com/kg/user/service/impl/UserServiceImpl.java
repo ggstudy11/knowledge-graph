@@ -3,6 +3,7 @@ package com.kg.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kg.common.UserContext;
 import com.kg.common.utils.JwtUtil;
 import com.kg.user.model.User;
 import com.kg.user.model.dto.LoginDTO;
@@ -111,8 +112,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO, Integer id) {
-        User user = getById(id);
+    public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO) {
+        User user = getById(UserContext.getUser());
         user.setUsername(updateUserInfoDTO.getUsername());
         user.setAvatar(updateUserInfoDTO.getAvatar());
 

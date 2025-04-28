@@ -1,4 +1,4 @@
-package com.kg.common;
+package com.kg.common.page;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
