@@ -13,7 +13,6 @@ import lombok.ToString;
 @Schema(description = "更新文件夹数据模型")
 @Data
 @ToString
-@Builder
 public class UpdateFolderDTO {
     private Integer folderId;
     private String folderName;

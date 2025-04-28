@@ -1,5 +1,6 @@
 package com.kg.file.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kg.common.page.PageDTO;
@@ -80,7 +81,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     @Override
     public PageDTO<FileFolderVO> pageQuery(Integer id, PageQuery pageQuery) {
         Page<Map<String, Object>> page = new Page<>(pageQuery.getPageNo(), pageQuery.getPageSize());
-        Page<Map<String, Object>> result = fileMapper.selectFileAndFolder(id, page);
+        IPage<Map<String, Object>> result = fileMapper.selectFileAndFolder(page, id);
 
         List<FileFolderVO> voList = result.getRecords().stream().map(record -> {
             FileFolderVO vo = new FileFolderVO();

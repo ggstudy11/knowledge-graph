@@ -41,6 +41,6 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
         folder.setCreateTime(LocalDateTime.now());
         folder.setName(updateFolderDTO.getFolderName());
 
-        this.save(folder);
+        this.updateById(folder);
     }
 }

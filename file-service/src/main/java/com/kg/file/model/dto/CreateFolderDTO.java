@@ -14,7 +14,6 @@ import lombok.ToString;
 @Schema(description = "创建文件数据模型")
 @Data
 @ToString
-@Builder
 public class CreateFolderDTO {
 
     @Schema(description = "文件夹名")

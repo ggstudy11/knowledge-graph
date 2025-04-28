@@ -17,7 +17,7 @@ public class UserInfoInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         String userInfo = request.getHeader("user-info");
         if (userInfo != null) {
-            UserContext.setUser(Long.valueOf(userInfo));
+            UserContext.setUser(Integer.valueOf(userInfo));
         }
         return true;
     }

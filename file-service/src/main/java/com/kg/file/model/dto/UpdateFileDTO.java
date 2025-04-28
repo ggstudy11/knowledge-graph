@@ -11,7 +11,6 @@ import lombok.ToString;
  * @description
  */
 @Data
-@Builder
 @ToString
 @Schema(description = "修改文件数据模型")
 public class UpdateFileDTO {

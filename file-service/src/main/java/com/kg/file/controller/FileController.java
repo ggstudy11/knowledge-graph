@@ -46,19 +46,24 @@ public class FileController {
 
     @PostMapping("/file/{id}")
     @Operation(summary = "保存文件", description = "保存文件内容")
-    public R<LocalDateTime> saveFile(MultipartFile file, @PathVariable Integer id) {
+    public R<LocalDateTime> saveFile(@RequestParam("file") MultipartFile file, @PathVariable(value = "id") Integer id) {
         return R.success(fileService.upload(file, id));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "文件列表查询", description = "查询指定列表下的文件")
-    public R<PageDTO<FileFolderVO>> queryAll(@PathVariable Integer id, PageQuery pageQuery) {
+    public R<PageDTO<FileFolderVO>> queryAll(@PathVariable(value = "id") Integer id,
+                                             @RequestParam(value = "pageNo") Integer pageNo,
+                                             @RequestParam(value = "pageSize") Integer pageSize) {
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.setPageNo(pageNo);
+        pageQuery.setPageSize(pageSize);
         return R.success(fileService.pageQuery(id, pageQuery));
     }
 
     @GetMapping("/file/{id}")
     @Operation(summary = "获取文件内容", description = "根据id获取文件url")
-    public R<String> getFile(@PathVariable Integer id) {
+    public R<String> getFile(@PathVariable(value = "id") Integer id) {
         return R.success(fileService.getUrl(id));
     }
 
@@ -72,7 +77,7 @@ public class FileController {
 
     @PutMapping("/file/{id}")
     @Operation(summary = "移动或修改文件名", description = "文件重命名、移动")
-    public R<Object> updateFile(@PathVariable Integer id, @RequestBody UpdateFileDTO updateFileDTO) {
+    public R<Object> updateFile(@PathVariable(value = "id") Integer id, @RequestBody UpdateFileDTO updateFileDTO) {
         fileService.updateFile(updateFileDTO, id);
         return R.success();
     }
@@ -85,7 +90,7 @@ public class FileController {
 
     @PutMapping("/folder/{id}")
     @Operation(summary = "移动或修改文件名", description = "文件重命名、移动")
-    public R<Object> updateFolder(@PathVariable Integer id, @RequestBody UpdateFolderDTO updateFolderDTO) {
+    public R<Object> updateFolder(@PathVariable(value = "id") Integer id, @RequestBody UpdateFolderDTO updateFolderDTO) {
         folderService.updateFolder(updateFolderDTO, id);
         return R.success();
     }
