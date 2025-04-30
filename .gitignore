@@ -1,3 +1,4 @@
 **/target
 **/src/main/resources
 /common/src/main/java/com/kg/common/utils/OssUtil.java
+/common/src/main/java/com/kg/common/utils/CozeUtil.java

@@ -46,6 +46,7 @@
         <swagger.version>2.2.0</swagger.version>
         <oss.version>3.17.4</oss.version>
         <hutool.version>5.8.11</hutool.version>
+        <coze.version>LATEST</coze.version>
     </properties>
 
     <dependencyManagement>
@@ -125,6 +126,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-jsqlparser</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.coze</groupId>
+                <artifactId>coze-api</artifactId>
+                <version>${coze.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
