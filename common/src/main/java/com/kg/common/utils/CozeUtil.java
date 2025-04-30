@@ -20,8 +20,9 @@ public class CozeUtil {
     private static final String Token = "pat_pwsvMJqcq9uW4xVnwHQb0ypDfVGbruu1eOS6H9uwJVKYwDhPdBxtHQ7AtMvWRy18";
     private static final String BOT_ID = "7498763513574899739";
     private static final String COZE_API_BASE = "https://api.coze.cn/v3/chat/";
-
-    public static KnowledgePoints chat(String userID, String msg) throws Exception {
+    /* we dont care the concrete ID because only chat once*/
+    private static final String USER_ID = "123456";
+    public static KnowledgePoints chat(String msg) {
 
         TokenAuth authCli = new TokenAuth(Token);
 
@@ -42,7 +43,7 @@ public class CozeUtil {
         CreateChatReq req =
                 CreateChatReq.builder()
                         .botID(BOT_ID)
-                        .userID(userID)
+                        .userID(USER_ID)
                         .messages(Collections.singletonList(Message.buildUserQuestionText(msg)))
                         .build();
 
@@ -60,8 +61,13 @@ public class CozeUtil {
          * And when the chat status is not completed, poll the status of the chat once every second.
          * After the chat is completed, retrieve all messages in the chat.
          * */
-        ChatPoll chat3 = coze.chat().createAndPoll(req);
-        String jsonStr = chat3.getMessages().get(chat3.getMessages().size() - 2).getContent();
-        return JSONUtil.toBean(jsonStr, KnowledgePoints.class);
+        try {
+            ChatPoll chat3 = coze.chat().createAndPoll(req);
+            String jsonStr = chat3.getMessages().get(chat3.getMessages().size() - 2).getContent();
+            return JSONUtil.toBean(jsonStr, KnowledgePoints.class);
+        } catch (Exception e) {
+            /* temporary deal*/
+            return null;
+        }
     }
 }

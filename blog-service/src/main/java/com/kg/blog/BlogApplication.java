@@ -1,5 +1,6 @@
 package com.kg.blog;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description 博客微服务启动类
  */
 @SpringBootApplication
+@MapperScan("com.kg.blog.repository")
 public class BlogApplication {
     public static void main(String[] args){
         SpringApplication.run(BlogApplication.class, args);
