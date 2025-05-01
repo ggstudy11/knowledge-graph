@@ -37,6 +37,18 @@ services:
     networks:
       - app-network
 
+  blog-service:
+    image: ggstudy11/kg-blogservice:latest  # 使用 Docker Hub 的用户名 + 镜像名
+    build:
+      context: ./blog-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m -XX:+UseG1GC
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge

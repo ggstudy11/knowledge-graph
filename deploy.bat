@@ -14,6 +14,9 @@ docker push ggstudy11/kg-userservice:latest
 echo Pushing file-service to Docker Hub...
 docker push ggstudy11/kg-fileservice:latest
 
+echo Pushing file-service to Docker Hub...
+docker push ggstudy11/kg-blogservice:latest
+
 echo All images have been successfully pushed to Docker Hub!
 
 pause
