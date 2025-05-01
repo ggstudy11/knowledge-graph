@@ -1,6 +1,10 @@
 package com.kg.graph.controller;
 
 
+import com.kg.common.R;
+import com.kg.graph.model.Knowledge;
+import com.kg.graph.model.KnowledgeDTO;
+import com.kg.graph.service.KnowledgeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +23,12 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "知识图谱接口", description = "知识图谱相关操作控制器")
 public class GraphController {
 
-    @PostMapping("/{id}")
-    @Operation(summary = "创建节点", description = "创建一个知识节点")
-    public void createNode() {
+    private final KnowledgeService knowledgeService;
 
+    @PostMapping("/{id}/node")
+    @Operation(summary = "创建节点", description = "创建一个知识节点")
+    public R<Knowledge> createNode(@PathVariable(value = "id") Integer id, @RequestBody KnowledgeDTO knowledgeDTO) {
+        return R.success(knowledgeService.create(knowledgeDTO, id));
     }
 
     @PutMapping("/{graphId}/{nodeId}")
@@ -43,10 +49,10 @@ public class GraphController {
 
     }
 
-    @GetMapping("/{graphId}/{nodeId}")
+    @GetMapping("/node/{id}")
     @Operation(summary = "获取节点详情", description = "获取某个节点的详细信息")
-    public void getNode() {
-
+    public R<Knowledge> getNode(@PathVariable(value = "id") String id) {
+        return R.success(knowledgeService.getNode(id));
     }
 
     @GetMapping("/{id}/search")

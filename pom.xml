@@ -133,6 +133,7 @@
                 <artifactId>coze-api</artifactId>
                 <version>${coze.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
