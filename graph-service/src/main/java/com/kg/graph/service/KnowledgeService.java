@@ -1,7 +1,10 @@
 package com.kg.graph.service;
 
 import com.kg.graph.model.Knowledge;
-import com.kg.graph.model.KnowledgeDTO;
+import com.kg.graph.model.dto.KnowledgeDTO;
+import com.kg.graph.model.dto.UpdateKnowledgeDTO;
+
+import java.util.List;
 
 /**
  * @author ggstudy11
@@ -11,5 +14,13 @@ import com.kg.graph.model.KnowledgeDTO;
 public interface KnowledgeService {
     Knowledge create(KnowledgeDTO knowledgeDTO, Integer id);
 
-    Knowledge getNode(String nodeId);
+    Knowledge get(Long id);
+
+    void delete(Long id);
+
+    Knowledge update(UpdateKnowledgeDTO updateknowledgeDTO, Long id);
+
+    List<Knowledge> getAll(Integer id);
+
+    List<Knowledge> search(String keyword);
 }

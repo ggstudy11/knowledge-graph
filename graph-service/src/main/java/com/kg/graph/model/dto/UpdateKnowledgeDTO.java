@@ -1,4 +1,4 @@
-package com.kg.graph.model;
+package com.kg.graph.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -7,13 +7,13 @@ import lombok.ToString;
 
 /**
  * @author ggstudy11
- * @date Created in 2025/5/1 11:51
- * @description
+ * @date Created in 2025/5/1 12:45
+ * @description 更新数据模型
  */
 @Data
 @ToString
-@Schema(description = "Knowledge接口传递数据模型")
-public class KnowledgeDTO {
+@Schema(description = "Knowledge更新数据模型")
+public class UpdateKnowledgeDTO {
     @NotNull(message = "名字不能为空")
     @Schema(description = "节点名字")
     private String name;
@@ -26,4 +26,7 @@ public class KnowledgeDTO {
 
     @Schema(description = "博客url")
     private String blog;
+
+    @Schema(description = "图谱id")
+    private Integer graphId;
 }

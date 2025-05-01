@@ -21,12 +21,10 @@ import java.time.LocalDateTime;
 public class Knowledge {
 
     @Id
-    @GeneratedValue(UUIDStringGenerator.class)
+    @GeneratedValue
     @Schema(description = "主键")
-    private String id;
+    private Long id;
 
-    @Schema(description = "用户id")
-    private Integer userId;
 
     @Schema(description = "对应知识图谱id")
     private Integer graphId;
