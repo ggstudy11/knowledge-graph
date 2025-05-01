@@ -49,6 +49,18 @@ services:
     networks:
       - app-network
 
+  graph-service:
+    image: ggstudy11/kg-graphservice:latest  # 使用 Docker Hub 的用户名 + 镜像名
+    build:
+      context: ./graph-service
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m -XX:+UseG1GC
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
