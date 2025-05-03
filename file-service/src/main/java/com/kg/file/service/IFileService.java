@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  * @description
  */
 public interface IFileService extends IService<File> {
-    FileVO create(@Valid CreateFileDTO createFileDTO, Integer id);
+    FileVO create(@Valid CreateFileDTO createFileDTO);
 
     LocalDateTime upload(MultipartFile file, Integer id);
 

@@ -41,12 +41,14 @@ public class FileController {
     @PostMapping("/file")
     @Operation(summary = "新建文件", description = "创建文件元描述符")
     public R<FileVO> createFile(@Valid @RequestBody CreateFileDTO createFileDTO) {
-        return R.success(fileService.create(createFileDTO, UserContext.getUser()));
+        log.info("创建文件：{}", createFileDTO);
+        return R.success(fileService.create(createFileDTO));
     }
 
     @PostMapping("/file/{id}")
     @Operation(summary = "保存文件", description = "保存文件内容")
     public R<LocalDateTime> saveFile(@RequestParam("file") MultipartFile file, @PathVariable(value = "id") Integer id) {
+        log.info("保存文件：{}", file);
         return R.success(fileService.upload(file, id));
     }
 
@@ -55,6 +57,7 @@ public class FileController {
     public R<PageDTO<FileFolderVO>> queryAll(@PathVariable(value = "id") Integer id,
                                              @RequestParam(value = "pageNo") Integer pageNo,
                                              @RequestParam(value = "pageSize") Integer pageSize) {
+        log.info("查询文件列表：{}", id);
         PageQuery pageQuery = new PageQuery();
         pageQuery.setPageNo(pageNo);
         pageQuery.setPageSize(pageSize);
@@ -64,6 +67,7 @@ public class FileController {
     @GetMapping("/file/{id}")
     @Operation(summary = "获取文件内容", description = "根据id获取文件url")
     public R<String> getFile(@PathVariable(value = "id") Integer id) {
+        log.info("获取文件：{}", id);
         return R.success(fileService.getUrl(id));
     }
 
@@ -71,6 +75,7 @@ public class FileController {
     @DeleteMapping("/file/{id}")
     @Operation(summary = "删除文件", description = "删除文件")
     public R<Object> deleteFile(@PathVariable Integer id) {
+        log.info("删除文件：{}", id);
         fileService.removeById(id);
         return R.success();
     }
@@ -78,6 +83,7 @@ public class FileController {
     @PutMapping("/file/{id}")
     @Operation(summary = "移动或修改文件名", description = "文件重命名、移动")
     public R<Object> updateFile(@PathVariable(value = "id") Integer id, @RequestBody UpdateFileDTO updateFileDTO) {
+        log.info("修改文件：{}", updateFileDTO);
         fileService.updateFile(updateFileDTO, id);
         return R.success();
     }
@@ -85,12 +91,14 @@ public class FileController {
     @PostMapping("/folder")
     @Operation(summary = "新建文件夹", description = "创建文件夹")
     public R<FolderVO> createFolder(@Valid @RequestBody CreateFolderDTO createFolderDTO) {
+        log.info("创建文件夹：{}", createFolderDTO);
         return R.success(folderService.create(createFolderDTO));
     }
 
     @PutMapping("/folder/{id}")
     @Operation(summary = "移动或修改文件名", description = "文件重命名、移动")
     public R<Object> updateFolder(@PathVariable(value = "id") Integer id, @RequestBody UpdateFolderDTO updateFolderDTO) {
+        log.info("修改文件夹：{}", updateFolderDTO);
         folderService.updateFolder(updateFolderDTO, id);
         return R.success();
     }

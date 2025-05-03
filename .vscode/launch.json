@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FileApplication",
+            "request": "launch",
+            "mainClass": "com.kg.file.FileApplication",
+            "projectName": "file-service"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-GatewayApplication<gateway>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

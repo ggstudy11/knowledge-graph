@@ -3,6 +3,8 @@ package com.kg.file.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kg.common.BusinessException;
+import com.kg.common.UserContext;
 import com.kg.common.page.PageDTO;
 import com.kg.common.page.PageQuery;
 import com.kg.common.utils.OssUtil;
@@ -13,7 +15,6 @@ import com.kg.file.model.vo.FileFolderVO;
 import com.kg.file.model.vo.FileVO;
 import com.kg.file.repository.FileMapper;
 import com.kg.file.service.IFileService;
-import com.kg.file.service.IFolderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author ggstudy11
@@ -35,15 +35,25 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     private final FileMapper fileMapper;
 
     @Override
-    public FileVO create(CreateFileDTO createFileDTO, Integer id) {
+    public FileVO create(CreateFileDTO createFileDTO) {
         String name = createFileDTO.getFileName();
         int folderId = createFileDTO.getFolderId();
         int type = createFileDTO.getFileType();
+        
+        this.lambdaQuery()
+                .eq(File::getName, name)
+                .eq(File::getFolderId, folderId)
+                .eq(File::getUserId, UserContext.getUser())
+                .eq(File::getType, type)
+                .oneOpt()
+                .ifPresent(file -> {
+                    throw new BusinessException("文件已存在");
+                });
 
         File file = File.builder()
                 .name(name)
                 .folderId(folderId)
-                .userId(id)
+                .userId(UserContext.getUser())
                 .type(type)
                 .createTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
@@ -81,7 +91,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     @Override
     public PageDTO<FileFolderVO> pageQuery(Integer id, PageQuery pageQuery) {
         Page<Map<String, Object>> page = new Page<>(pageQuery.getPageNo(), pageQuery.getPageSize());
-        IPage<Map<String, Object>> result = fileMapper.selectFileAndFolder(page, id);
+        IPage<Map<String, Object>> result = fileMapper.selectFileAndFolder(page, id, UserContext.getUser());
 
         List<FileFolderVO> voList = result.getRecords().stream().map(record -> {
             FileFolderVO vo = new FileFolderVO();
@@ -104,9 +114,18 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
 
         file.setUpdateTime(LocalDateTime.now());
         file.setRevisions(file.getRevisions() + 1);
+
+        this.lambdaQuery()
+                .eq(File::getName, name)
+                .eq(File::getFolderId, folderId)
+                .eq(File::getUserId, UserContext.getUser())
+                .ne(File::getId, id)
+                .oneOpt()
+                .ifPresent(f -> {
+                    throw new BusinessException("文件已存在");
+                });
         file.setName(name);
         file.setFolderId(folderId);
-
         this.updateById(file);
     }
 }

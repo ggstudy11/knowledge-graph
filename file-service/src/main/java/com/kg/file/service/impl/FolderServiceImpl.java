@@ -1,6 +1,7 @@
 package com.kg.file.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kg.common.BusinessException;
 import com.kg.common.UserContext;
 import com.kg.file.model.Folder;
 import com.kg.file.model.dto.CreateFolderDTO;
@@ -21,7 +22,16 @@ import java.time.LocalDateTime;
 public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> implements IFolderService {
     @Override
     public FolderVO create(CreateFolderDTO createFolderDTO) {
-
+       
+        this.lambdaQuery()
+               .eq(Folder::getName, createFolderDTO.getName())
+               .eq(Folder::getUserId, UserContext.getUser())
+               .eq(Folder::getParentId, createFolderDTO.getFolderId())
+               .oneOpt()
+               .ifPresent(folder -> {
+                    throw new BusinessException("文件夹已存在");
+                });
+                
         Folder folder = Folder.builder()
                 .name(createFolderDTO.getName())
                 .userId(UserContext.getUser())
@@ -38,7 +48,6 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
         Folder folder = this.getById(id);
 
         folder.setParentId(updateFolderDTO.getFolderId());
-        folder.setCreateTime(LocalDateTime.now());
         folder.setName(updateFolderDTO.getFolderName());
 
         this.updateById(folder);
