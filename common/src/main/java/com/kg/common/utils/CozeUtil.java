@@ -23,7 +23,7 @@ public class CozeUtil {
     private static final String COZE_API_BASE = "https://api.coze.cn/v3/chat/";
     /* we dont care the concrete ID because only chat once*/
     private static final String USER_ID = "123456";
-    public static KnowledgePoints chat(String msg) {
+    public static KnowledgePoints blogChat(String msg) {
 
         TokenAuth authCli = new TokenAuth(Token);
 

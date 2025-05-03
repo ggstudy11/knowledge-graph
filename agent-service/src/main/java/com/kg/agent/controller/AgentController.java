@@ -21,7 +21,7 @@ public class AgentController {
     @PostMapping("/{id}")
     @Operation(summary = "发送问题", description = "根据对应会话id发送问答")
     public void sendQuest() {
-
+        
     }
 
     @PutMapping("/{id}/intention")

@@ -29,7 +29,7 @@ public class BlogController {
     @Operation(summary = "提取博客关键字", description = "提取博客关键字生成知识节点")
     public R<KnowledgePoints> extract(@RequestBody String url) {
         log.info("提取博客关键字：{}", url);
-        return R.success(CozeUtil.chat(url));
+        return R.success(CozeUtil.blogChat(url));
     }
 
     @GetMapping("/set")
