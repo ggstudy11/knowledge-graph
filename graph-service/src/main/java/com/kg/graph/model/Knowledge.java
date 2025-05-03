@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.time.LocalDateTime;
 
@@ -35,12 +34,24 @@ public class Knowledge {
     @Schema(description = "节点描述")
     private String description;
 
+    @Schema(description = "关联的文件名")
+    private String fileName;
+
     @Schema(description = "绑定的文件id")
     private Integer fileId;
 
     @Schema(description = "博客url")
-    private String  blog;
+    private String  blogUrl;
 
+    @Schema(description = "博客标题")
+    private String blogTitle;
+
+    @Schema(description = "节点大小")
+    private Integer size;
+
+    @Schema(description = "节点颜色")
+    private String color;
+    
     @Schema(description = "创建时间")
     private LocalDateTime createTime;
 

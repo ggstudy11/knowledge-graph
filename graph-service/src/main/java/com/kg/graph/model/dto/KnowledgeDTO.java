@@ -24,6 +24,18 @@ public class KnowledgeDTO {
     @Schema(description = "关联文件id")
     private Integer fileId;
 
+    @Schema(description = "关联文件名")
+    private String fileName;
+
     @Schema(description = "博客url")
-    private String blog;
+    private String blogUrl;
+
+    @Schema(description = "博客标题")
+    private String blogTitle;
+
+    @Schema(description = "节点大小")
+    private Integer size;
+
+    @Schema(description = "节点颜色")
+    private String color;
 }

@@ -36,6 +36,16 @@
             "projectName": "blog-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GraphApplication<graph-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kg.graph.GraphApplication",
+            "projectName": "graph-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

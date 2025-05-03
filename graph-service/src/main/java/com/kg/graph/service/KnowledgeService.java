@@ -16,7 +16,7 @@ public interface KnowledgeService {
 
     Knowledge get(Long id);
 
-    void delete(Long id);
+    List<Long> delete(Long id);
 
     Knowledge update(UpdateKnowledgeDTO updateknowledgeDTO, Long id);
 

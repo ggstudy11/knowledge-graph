@@ -3,15 +3,16 @@ package com.kg.graph.model;
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.RelationshipProperties;
+import org.springframework.data.neo4j.core.schema.Node;
+
 
 /**
  * @author ggstudy11
  * @date Created in 2025/5/1 13:17
  * @description
  */
-@RelationshipProperties
 @Data
+@Node
 public class Link {
 
     @Id

@@ -35,55 +35,63 @@ public class GraphController {
     @PostMapping("/{id}/node")
     @Operation(summary = "创建节点", description = "创建一个知识节点")
     public R<Knowledge> createNode(@PathVariable(value = "id") Integer id, @RequestBody KnowledgeDTO knowledgeDTO) {
+        log.info("创建节点：{}", knowledgeDTO);
         return R.success(knowledgeService.create(knowledgeDTO, id));
     }
 
     @PutMapping("/node/{id}")
     @Operation(summary = "更新节点", description = "更新知识节点")
     public R<Knowledge> updateNode(@PathVariable(value = "id") Long id, @RequestBody UpdateKnowledgeDTO updateKnowledgeDTO) {
+        log.info("更新节点：{}", updateKnowledgeDTO);
         return R.success(knowledgeService.update(updateKnowledgeDTO, id));
     }
 
     @DeleteMapping("/node/{id}")
     @Operation(summary = "删除节点", description = "删除节点")
-    public R<Object> deleteNode(@PathVariable(value = "id") Long id) {
-        knowledgeService.delete(id);
-        return R.success();
+    public R<List<Long>> deleteNode(@PathVariable(value = "id") Long id) {
+        log.info("删除节点：{}", id);
+        return R.success(knowledgeService.delete(id));
     }
 
     @GetMapping("/{id}/node")
     @Operation(summary = "获取所有节点", description = "获取id知识图谱的所有节点")
     public R<List<Knowledge>> getAllNodes(@PathVariable(value = "id") Integer id) {
+        log.info("获取所有节点：{}", id);
         return R.success(knowledgeService.getAll(id));
     }
 
     @GetMapping("/node/{id}")
     @Operation(summary = "获取节点详情", description = "获取某个节点的详细信息")
     public R<Knowledge> getNode(@PathVariable(value = "id") Long id) {
+        log.info("获取节点详情：{}", id);
         return R.success(knowledgeService.get(id));
     }
 
     @GetMapping("/search")
     @Operation(summary = "按关键词搜索节点", description = "根据关键词模糊匹配节点")
     public R<List<Knowledge>> searchNode(@RequestParam("keyword") String keyword) {
+        log.info("按关键词搜索节点：{}", keyword);
         return R.success(knowledgeService.search(keyword));
     }
 
     @GetMapping("/{id}/relation")
     @Operation(summary = "获取所有关系", description = "获取所有节点之间的关系")
     public R<List<Link>> getAllRelations(@PathVariable(value = "id") Integer id) {
+        log.info("获取所有关系：{}", id);
         return R.success(linkService.getAll(id));
     }
 
     @PostMapping("/{id}/relation")
     @Operation(summary = "创建节点之间关系", description = "创建节点之间的关系")
     public R<Long> createRelation(@PathVariable(value = "id") Integer id, @RequestBody LinkDTO linkDTO) {
+        log.info("创建节点之间关系：{}", linkDTO);
         return R.success(linkService.create(linkDTO, id));
     }
 
     @DeleteMapping("/relation/{id}")
     @Operation(summary = "删除节点关系", description = "删除节点关系")
     public R<Object> deleteRelation(@PathVariable(value = "id") Long id) {
+        log.info("删除节点关系：{}", id);
         linkService.delete(id);
         return R.success();
     }
