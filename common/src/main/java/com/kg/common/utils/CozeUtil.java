@@ -2,7 +2,6 @@ package com.kg.common.utils;
 
 import cn.hutool.json.JSONUtil;
 import com.coze.openapi.client.chat.*;
-import com.coze.openapi.client.chat.model.Chat;
 import com.coze.openapi.client.chat.model.ChatPoll;
 import com.coze.openapi.client.connversations.message.model.Message;
 import com.coze.openapi.service.auth.TokenAuth;
@@ -19,7 +18,7 @@ import java.util.Collections;
  */
 public class CozeUtil {
     private static final String Token = "pat_pwsvMJqcq9uW4xVnwHQb0ypDfVGbruu1eOS6H9uwJVKYwDhPdBxtHQ7AtMvWRy18";
-    private static final String BOT_ID = "7498763513574899739";
+    private static final String BLOG_BOT_ID = "7498763513574899739";
     private static final String COZE_API_BASE = "https://api.coze.cn/v3/chat/";
     /* we dont care the concrete ID because only chat once*/
     private static final String USER_ID = "123456";
@@ -43,7 +42,7 @@ public class CozeUtil {
          * */
         CreateChatReq req =
                 CreateChatReq.builder()
-                        .botID(BOT_ID)
+                        .botID(BLOG_BOT_ID)
                         .userID(USER_ID)
                         .messages(Collections.singletonList(Message.buildUserQuestionText(msg)))
                         .build();

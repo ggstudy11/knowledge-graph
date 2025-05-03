@@ -46,6 +46,16 @@
             "projectName": "graph-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AgentApplication<agent-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kg.agent.AgentApplication",
+            "projectName": "agent-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

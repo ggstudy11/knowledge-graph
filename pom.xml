@@ -2,6 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.6</version>
+    </parent>
+
     <groupId>com.tj.cn</groupId>
     <artifactId>knowledge-graph</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -18,6 +24,28 @@
             <email>2251338@tongji.edu.cn</email>
         </developer>
     </developers>
+    
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <name>Central Portal Snapshots</name>
+            <id>central-portal-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <!--子模块-->
     <modules>
@@ -47,6 +75,7 @@
         <oss.version>3.17.4</oss.version>
         <hutool.version>5.8.11</hutool.version>
         <coze.version>LATEST</coze.version>
+        <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +103,14 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
