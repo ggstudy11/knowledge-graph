@@ -31,8 +31,12 @@ public class BlogSetServiceImpl extends ServiceImpl<BlogSetMapper, BlogSet> impl
     @Override
     public void updateSet(BlogSet blogSet) {
         BlogSet set = this.getSet();
-        set.setAutoNode(blogSet.getAutoNode());
-        set.setAutoMonitor(blogSet.getAutoMonitor());
+        if (blogSet.getAutoNode() != null) {
+            set.setAutoNode(blogSet.getAutoNode());
+        }
+        if (blogSet.getAutoMonitor()!= null) {
+            set.setAutoMonitor(blogSet.getAutoMonitor());
+        }
         this.updateById(set);
     }
 }

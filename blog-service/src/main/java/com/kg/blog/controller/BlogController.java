@@ -28,18 +28,21 @@ public class BlogController {
     @PostMapping("/extract")
     @Operation(summary = "提取博客关键字", description = "提取博客关键字生成知识节点")
     public R<KnowledgePoints> extract(@RequestBody String url) {
+        log.info("提取博客关键字：{}", url);
         return R.success(CozeUtil.chat(url));
     }
 
     @GetMapping("/set")
     @Operation(summary = "获取用户设置", description = "获取用户设置")
     public R<BlogSet> getSet() {
+        log.info("获取用户设置");
         return R.success(blogSetService.getSet());
     }
 
     @PutMapping("/set")
     @Operation(summary = "更新用户设置", description = "更新用户设置")
     public R<Object> updateSet(@RequestBody BlogSet blogSet) {
+        log.info("更新用户设置：{}", blogSet);
         blogSetService.updateSet(blogSet);
         return R.success();
     }

@@ -7,6 +7,7 @@ import com.coze.openapi.client.chat.model.ChatPoll;
 import com.coze.openapi.client.connversations.message.model.Message;
 import com.coze.openapi.service.auth.TokenAuth;
 import com.coze.openapi.service.service.CozeAPI;
+import com.kg.common.BusinessException;
 import com.kg.common.KnowledgePoints;
 
 import java.util.Collections;
@@ -46,14 +47,6 @@ public class CozeUtil {
                         .userID(USER_ID)
                         .messages(Collections.singletonList(Message.buildUserQuestionText(msg)))
                         .build();
-
-        CreateChatResp chatResp = coze.chat().create(req);
-        System.out.println(chatResp);
-        Chat chat = chatResp.getChat();
-        // get chat id and conversationID
-        String chatID = chat.getID();
-        String conversationID = chat.getConversationID();
-
         /*
          * Step two, poll the result of chat
          * Assume the development allows at most one chat to run for 10 seconds. If it exceeds 10 seconds,
@@ -66,8 +59,7 @@ public class CozeUtil {
             String jsonStr = chat3.getMessages().get(chat3.getMessages().size() - 2).getContent();
             return JSONUtil.toBean(jsonStr, KnowledgePoints.class);
         } catch (Exception e) {
-            /* temporary deal*/
-            return null;
+            throw new BusinessException("CozeAPI调用失败");
         }
     }
 }

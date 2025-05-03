@@ -26,6 +26,16 @@
             "projectName": "user-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BlogApplication<blog-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kg.blog.BlogApplication",
+            "projectName": "blog-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
