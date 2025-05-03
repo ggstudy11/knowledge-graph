@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * @author ggstudy11
@@ -13,6 +14,7 @@ import lombok.Data;
  */
 @Schema(description = "登录数据模型")
 @Data
+@ToString
 public class LoginDTO {
 
     @Schema(description = "电话号", example = "15669893275")

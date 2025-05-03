@@ -23,11 +23,11 @@ public class RegisterDTO {
     @Pattern(regexp = "^1[3-9]\\d{9}$", message = "电话号必须是有效的中国手机号")
     private String phone;
 
-    @Schema(description = "用户名")
+    @Schema(description = "用户名", example = "测试用户1")
     @NotNull(message = "用户名不能为空")
     private String username;
 
-    @Schema(description = "密码")
+    @Schema(description = "密码", example = "test123456")
     @NotNull(message = "密码不能为空")
     private String password;
 }

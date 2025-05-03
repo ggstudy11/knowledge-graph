@@ -38,6 +38,7 @@ public class UserController {
     @GetMapping("/login")
     @Operation(summary = "用户登录", description = "用户通过手机号和密码登录")
     public R<LoginVO> login(@Valid LoginDTO loginDTO) {
+        log.info("用户登录: {}", loginDTO);
         return R.success(userService.login(loginDTO));
     }
 
@@ -49,6 +50,7 @@ public class UserController {
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "用户通过手机号和密码注册")
     public R<Object> register(@Valid @RequestBody RegisterDTO registerDTO) {
+        log.info("用户注册：{}", registerDTO);
         userService.register(registerDTO);
         return R.success();
     }
@@ -73,6 +75,7 @@ public class UserController {
     @GetMapping()
     @Operation(summary = "获取用户信息", description = "获取用户相关信息")
     public R<UserInfoVO> get() {
+        log.info("获取用户信息：{}", UserContext.getUser());
         return R.success(userService.getInfo(UserContext.getUser()));
     }
 
@@ -84,6 +87,7 @@ public class UserController {
     @PutMapping("/password")
     @Operation(summary = "找回密码", description = "根据手机号和修改后的密码，修改密码")
     public R<Object> updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+        log.info("找回密码：{}", updatePasswordDTO);
         userService.updatePassword(updatePasswordDTO);
         return R.success();
     }

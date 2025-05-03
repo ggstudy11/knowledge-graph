@@ -3,6 +3,7 @@ package com.kg.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kg.common.BusinessException;
 import com.kg.common.UserContext;
 import com.kg.common.utils.JwtUtil;
 import com.kg.user.model.User;
@@ -35,15 +36,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String phone = loginDTO.getPhone();
         String password = loginDTO.getPassword();
 
-        /* 获取盐值 */
+        
         User user = this.getOne(new QueryWrapper<User>().lambda().eq(User::getPhone, phone));
+        if (user == null) {
+            throw new BusinessException("用户不存在");
+        }
+
+        /* 获取盐值 */
         String salt = user.getSalt();
 
         String saltPassword = password + salt;
         String passwordInMd5 = DigestUtils.md5DigestAsHex(saltPassword.getBytes());
 
         if (!passwordInMd5.equals(user.getPassword())) {
-            /* some*/
+            throw new BusinessException("密码错误");
         }
 
         Map<String, Object> claims = new HashMap<>();
@@ -64,6 +70,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String phone = registerDTO.getPhone();
         String username = registerDTO.getUsername();
 
+        /* 检查手机号是否已经被注册 */
+        User existUser = this.getOne(new QueryWrapper<User>().lambda().eq(User::getPhone, phone));
+        if (existUser != null) {
+            /* 用户已存在 */
+            throw new BusinessException("手机号已被注册");
+        }
+
         /* 随机一个salt值 */
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[16];
@@ -80,7 +93,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .salt(salt)
                 .phone(phone)
                 .gender(0)
-                .avatar("https://xxx.com")
+                .avatar("https://knowgraph-bucket.oss-cn-shanghai.aliyuncs.com/6c1b584dad9add524a102a230fb8e1fe.jpg")
                 .build();
 
         this.save(user);
@@ -103,6 +116,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String phone = updatePasswordDTO.getPhone();
 
         User user = this.getOne(new QueryWrapper<User>().lambda().eq(User::getPhone, phone));
+        /* 用户不存在 */
+        if (user == null) {
+            throw new BusinessException("用户不存在");
+        }
         String salt = user.getSalt();
         String newPassword = salt + password;
         String newPasswordInMD5 = DigestUtils.md5DigestAsHex(newPassword.getBytes());
@@ -114,9 +131,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public void updateInfo(UpdateUserInfoDTO updateUserInfoDTO) {
         User user = getById(UserContext.getUser());
-        user.setUsername(updateUserInfoDTO.getUsername());
-        user.setAvatar(updateUserInfoDTO.getAvatar());
-
+        if (updateUserInfoDTO.getAvatar() != null) {
+            user.setAvatar(updateUserInfoDTO.getAvatar());
+        }
+        if (updateUserInfoDTO.getUsername()!= null) {
+            user.setUsername(updateUserInfoDTO.getUsername());
+        }
         this.updateById(user);
     }
 }
